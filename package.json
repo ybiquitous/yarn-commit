@@ -1,0 +1,51 @@
+{
+  "name": "yarn-commit",
+  "version": "0.1.0",
+  "repository": "ybiquitous/yarn-commit",
+  "author": "ybiquitous <ybiquitous@gmail.com>",
+  "license": "MIT",
+  "main": "src/index.js",
+  "bin": "./bin/cli.js",
+  "engines": {
+    "node": ">=6"
+  },
+  "dependencies": {
+    "@yarnpkg/lockfile": "^1.0.0",
+    "fast-json-patch": "^2.0.6",
+    "fs-extra": "^5.0.0",
+    "hosted-git-info": "^2.5.0",
+    "markdown-table": "^1.1.1",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.2"
+  },
+  "devDependencies": {
+    "ybiq": "*"
+  },
+  "scripts": {
+    "test": "test",
+    "test:watch": "test --watch",
+    "test:coverage": "echo \"unsupported.\" && exit 1",
+    "build": "babel src/ -d lib/",
+    "lint:js": "eslint --ignore-path .gitignore --ext .js,.jsx,.mjs .",
+    "lint:js:fix": "npm run lint:js -- --fix",
+    "lint:md": "markdownlint *.md",
+    "lint": "npm-run-all --print-name --print-label --parallel lint:*",
+    "commitmsg": "commitlint -e",
+    "precommit": "lint-staged",
+    "release": "standard-version",
+    "release:dry-run": "standard-version --dry-run"
+  },
+  "lint-staged": {
+    "*.{js,jsx,mjs}": [
+      "eslint --fix --no-ignore",
+      "git add"
+    ],
+    "*.md": "markdownlint"
+  },
+  "standard-version": {
+    "message": "chore(release): new version %s",
+    "scripts": {
+      "postchangelog": "prepend CHANGELOG.md \"<!-- markdownlint-disable -->\n\""
+    }
+  }
+}
