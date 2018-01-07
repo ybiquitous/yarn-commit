@@ -1,3 +1,5 @@
 #!/usr/bin/env node
 
-require('..')()
+const out = require('..')()
+
+process.stdout.write(out)

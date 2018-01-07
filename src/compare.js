@@ -1,4 +1,5 @@
 const jsonpatch = require('fast-json-patch')
+const { pipe, filter, map, sortBy, uniqBy } = require('lodash/fp')
 
 const withVersionOnly = e => e.path.endsWith('/version')
 
@@ -18,9 +19,11 @@ const toFormat = before => ({ op, path, value }) => ({
 })
 
 const compare = (before, after) =>
-  jsonpatch
-    .compare(before, after)
-    .filter(withVersionOnly)
-    .map(toFormat(before))
+  pipe(
+    filter(withVersionOnly),
+    map(toFormat(before)),
+    sortBy('name'),
+    uniqBy('name')
+  )(jsonpatch.compare(before, after))
 
 module.exports = compare
