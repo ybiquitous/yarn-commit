@@ -1,1 +1,5 @@
-# yarn-commit
+# `yarn-upgrade-commit`
+
+## License
+
+[MIT](LICENSE) © ybiquitous
