@@ -35,7 +35,7 @@
   },
   "scripts": {
     "test": "tape test/**/*.js",
-    "test:watch": "watch \"npm test\" test/",
+    "test:watch": "watch \"npm test\" test/ src/ bin/",
     "test:coverage": "echo \"unsupported.\" && exit 1",
     "build": "babel src/ -d lib/",
     "lint:js": "eslint --ignore-path .gitignore --ext .js,.jsx,.mjs .",
